@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">078_UCP2</string>
+    <string name="nma_mhs">Nama Mahsiswa</string>
+    <string name="nim">NIM</string>
+    <string name="konsen">Konsentrasi</string>
+    <string name="judul">Judul Skripsi</string>
+    <string name="haris">Haris Setiawan</string>
+    <string name="dwi">Dwi Djoko P</string>
+    <string name="april">Aprilia Kurniati</string>
+    <string name="next">Next</string>
+    <string name="cancel">Cancel</string>
+    <string name="btn_back">Cancel</string>
+    <string name="dosen">Dosen Pembimbing</string>
+    <string name="send">Submit</string>
+
 </resources>
