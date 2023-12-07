@@ -13,6 +13,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -69,7 +70,7 @@ fun _078_UCP2App(
             )
         }
     ) { innerPadding ->
-        val uiState by ViewModel.stateUI.collectAsState()
+        val uiState by viewModel.stateUI.collectAsState() // Perbaikan di sini
         NavHost(
             navController = navController,
             startDestination = PengelolaHalaman.Home.name,
@@ -85,11 +86,15 @@ fun _078_UCP2App(
             }
             composable(route = PengelolaHalaman.Formulir.name) {
                 HalamanSatu(
-                    onSubmitButtonClick = {
-                        viewModel.setData(it)
+                    pilihanDosen = listOf("Dosen1", "Dosen2", "Dosen3"),
+                    onSelectionChanged = { /* Implement your logic here */ },
+                    onNextButtonClicked = { /* Implement your logic here */ },
+                    onSubmitButtonClick = { data ->
+                        viewModel.setData(data)
                         navController.navigate(PengelolaHalaman.Summary.name)
                     },
-
+                    onCancelButtonClicked = { navController.popBackStack() }
+                )
             }
             composable(route = PengelolaHalaman.Summary.name) {
                 HalamanDua(
@@ -99,10 +104,10 @@ fun _078_UCP2App(
                     //onSendButtonClicked = { subject: String, summary: String -> }
                 )
             }
-            }
         }
     }
 }
+
 
 private fun cancelOrderAndNavigateToHome(
     viewModel: ViewModel,

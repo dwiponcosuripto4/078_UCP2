@@ -165,3 +165,17 @@ fun HalamanSatu(
         }
     }
 
+@Preview(showBackground = true)
+@Composable
+fun PreviewHalamanSatu() {
+    val pilihanDosen = listOf("Dosen1", "Dosen2", "Dosen3") // Ganti dengan daftar pilihan Dosen yang sesuai
+    _078_UCP2Theme {
+        HalamanSatu(
+            pilihanDosen = pilihanDosen,
+            onSelectionChanged = {},
+            onNextButtonClicked = {},
+            onSubmitButtonClick = {},
+            onCancelButtonClicked = {}
+        )
+    }
+}
