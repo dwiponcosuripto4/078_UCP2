@@ -37,7 +37,6 @@ import com.example.a078_ucp2.ui.theme._078_UCP2Theme
 fun HalamanSatu(
     pilihanDosen: List<String>,
     onSelectionChanged: (String) -> Unit,
-    onNextButtonClicked:() -> Unit,
     onSubmitButtonClick: (MutableList<String>) -> Unit,
     onCancelButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
@@ -64,8 +63,8 @@ fun HalamanSatu(
 
     Column(
         verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally, // Tambahkan ini
         modifier = Modifier
-            .padding(16.dp)
             .fillMaxSize()
     ) {
         Text(
@@ -90,7 +89,7 @@ fun HalamanSatu(
             konsenTxt = it
         }, label = {
             Text(
-                text = "Telepon"
+                text = "Konsentrasi"
             )
         },
             singleLine = true
@@ -100,80 +99,74 @@ fun HalamanSatu(
             judulTxt = it
         }, label = {
             Text(
-                text = "Telepon"
+                text = "Judul Skripsi"
             )
         },
             singleLine = true
         )
         Spacer(modifier = Modifier.padding(16.dp))
+        Text(text = "Dosen Pembimbing")
         Column(
-            modifier = modifier,
-            verticalArrangement = Arrangement.SpaceBetween
+            modifier =
+            Modifier.padding(dimensionResource(R.dimen.padding_medium))
         ) {
-            Column(
-                modifier =
-                Modifier.padding(dimensionResource(R.dimen.padding_medium))
-            ) {
-                pilihanDosen.forEach { item ->
-                    Row(modifier = Modifier.selectable(
-                        selected = DosenTxt == item,
+            pilihanDosen.forEach { item ->
+                Row(modifier = Modifier.selectable(
+                    selected = DosenTxt == item,
+                    onClick = {
+                        DosenTxt = item
+                        onSelectionChanged(item)
+                    }
+                ),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    RadioButton(selected = DosenTxt == item,
                         onClick = {
                             DosenTxt = item
                             onSelectionChanged(item)
                         }
-                    ),
-                        verticalAlignment = Alignment.CenterVertically
-                    ) {
-                        RadioButton(selected = DosenTxt == item,
-                            onClick = {
-                                DosenTxt = item
-                                onSelectionChanged(item)
-                            }
-                        )
-                        Text(item)
+                    )
+                    Text(item)
 
-                    }
                 }
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(dimensionResource(R.dimen.padding_medium))
-                        .weight(1f, false),
-                    horizontalArrangement =
-                    Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
-                    verticalAlignment = Alignment.Bottom
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(R.dimen.padding_medium))
+                    .weight(1f, false),
+                horizontalArrangement =
+                Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium)),
+                verticalAlignment = Alignment.Bottom
+            ) {
+                OutlinedButton(
+                    modifier = Modifier.weight(1f),
+                    onClick =
+                    onCancelButtonClicked
                 ) {
-                    OutlinedButton(
-                        modifier = Modifier.weight(1f),
-                        onClick =
-                        onCancelButtonClicked
-                    ) {
-                        Text(stringResource(R.string.cancel))
-                    }
-                    Button(
-                        modifier = Modifier.weight(1f),
-                        enabled = namaTxt.isNotEmpty() && nimTxt.isNotEmpty() && konsenTxt.isNotEmpty() && judulTxt.isNotEmpty(),
-                        onClick = { onSubmitButtonClick(listDataTxt) }
-                    ) {
-                        Text(stringResource(R.string.next))
-                    }
+                    Text(stringResource(R.string.cancel))
                 }
-
+                Button(
+                    modifier = Modifier.weight(1f),
+                    enabled = namaTxt.isNotEmpty() && nimTxt.isNotEmpty() && konsenTxt.isNotEmpty() && judulTxt.isNotEmpty(),
+                    onClick = { onSubmitButtonClick(listDataTxt) }
+                ) {
+                    Text(stringResource(R.string.next))
                 }
             }
 
         }
     }
+    }
 
 @Preview(showBackground = true)
 @Composable
 fun PreviewHalamanSatu() {
-    val pilihanDosen = listOf("Dosen1", "Dosen2", "Dosen3") // Ganti dengan daftar pilihan Dosen yang sesuai
+    val pilihanDosen = listOf("Haris", "Giga", "Damar") // Ganti dengan daftar pilihan Dosen yang sesuai
     _078_UCP2Theme {
         HalamanSatu(
             pilihanDosen = pilihanDosen,
             onSelectionChanged = {},
-            onNextButtonClicked = {},
             onSubmitButtonClick = {},
             onCancelButtonClicked = {}
         )

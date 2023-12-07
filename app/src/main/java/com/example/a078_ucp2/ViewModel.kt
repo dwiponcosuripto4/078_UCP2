@@ -17,7 +17,7 @@ class ViewModel : ViewModel() {
                 namamhs = listData[0],
                 nim = listData[1],
                 konsen = listData[2],
-                judulsk = listData[3],
+                judulsk = listData[3]
             )
         }
     }

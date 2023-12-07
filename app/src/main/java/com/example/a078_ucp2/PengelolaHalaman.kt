@@ -86,9 +86,8 @@ fun _078_UCP2App(
             }
             composable(route = PengelolaHalaman.Formulir.name) {
                 HalamanSatu(
-                    pilihanDosen = listOf("Dosen1", "Dosen2", "Dosen3"),
-                    onSelectionChanged = { /* Implement your logic here */ },
-                    onNextButtonClicked = { /* Implement your logic here */ },
+                    pilihanDosen = dosen.map { stringResource(it) },
+                    onSelectionChanged = { viewModel.setDosen(it) },
                     onSubmitButtonClick = { data ->
                         viewModel.setData(data)
                         navController.navigate(PengelolaHalaman.Summary.name)
@@ -99,9 +98,13 @@ fun _078_UCP2App(
             composable(route = PengelolaHalaman.Summary.name) {
                 HalamanDua(
                     UIState = uiState,
+
                     onCancelButtonClicked = {
                         cancelOrderAndNavigateToData(navController) },
-                    //onSendButtonClicked = { subject: String, summary: String -> }
+                    onSubmitButtonClicked = {
+                        // Aksi yang akan diambil ketika tombol submit ditekan
+                        navController.popBackStack(PengelolaHalaman.Home.name, inclusive = false)
+                    }
                 )
             }
         }

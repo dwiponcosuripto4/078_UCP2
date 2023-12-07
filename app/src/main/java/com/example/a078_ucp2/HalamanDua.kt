@@ -17,13 +17,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.a078_ucp2.data.UIState
 
 @Composable
 fun HalamanDua(
     UIState: UIState,
     onCancelButtonClicked: () -> Unit,
-    //onCancelButtonClicked: (String, String) -> Unit,
+    onSubmitButtonClicked: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val items = listOf(
@@ -80,7 +81,7 @@ fun HalamanDua(
             ) {
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {}
+                    onClick = onSubmitButtonClicked
                 ) {
                     Text(stringResource(R.string.send))
                 }
@@ -94,4 +95,15 @@ fun HalamanDua(
 
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun PreviewHalamanDua() {
+    val uiState = UIState()
+    HalamanDua(
+        UIState = uiState,
+        onCancelButtonClicked = {},
+        onSubmitButtonClicked = {}
+    )
 }
